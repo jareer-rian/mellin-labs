@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { presetSession, numericalInput, isUnchangedPreset, readSession } from "../lib/session.ts";
+import { initialTuning, presetSession, numericalInput, isUnchangedPreset, readSession } from "../lib/session.ts";
 
 void test("preset, slider units, and share-state round trip",()=>{
   const s=presetSession(0);
@@ -9,6 +9,13 @@ void test("preset, slider units, and share-state round trip",()=>{
   assert.ok(!isUnchangedPreset(s));
   assert.equal(numericalInput(s).moments[0],Number(s.rows[0].value)+2*Number(s.rows[0].error));
   assert.deepEqual(readSession(JSON.stringify(s)),s);
+});
+void test("exploration settings survive sharing and cannot masquerade as a preset",()=>{
+  const s=presetSession(1);s.tuning={...initialTuning(),mass:0,logAlpha:-1};
+  assert.deepEqual(readSession(JSON.stringify(s)),s);
+  assert.equal(isUnchangedPreset(s),false);
+  s.tuning.slope=0;
+  assert.throws(()=>readSession(JSON.stringify(s)),/Invalid regularization/);
 });
 void test("missing inputs are not silently treated as zero",()=>{
   const s=presetSession(0);s.rows[0].value="";

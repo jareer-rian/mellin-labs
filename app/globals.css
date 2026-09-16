@@ -16,7 +16,7 @@
   --radius-lg: 10px; --radius-md: 8px; --radius-sm: 6px;
 }
 :root {
-  --background:#f4f6f5; --foreground:#1b3340; --card:#fff; --primary:#126c83;
+  --background:#e7eff0; --foreground:#1b3340; --card:#fff; --primary:#126c83;
   --muted:#edf3f3; --muted-foreground:#63777e; --border:#dce5e5; --radius:.65rem;
 }
 .dark {
@@ -24,7 +24,14 @@
   --muted:#243c45; --muted-foreground:#9bb4bc; --border:#3b535d;
 }
 *{box-sizing:border-box;border-color:var(--border)}
-body{margin:0;background:var(--background);color:var(--foreground);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:linear-gradient(135deg,#e4edef 0%,#edf3f2 52%,#e1ebed 100%);background-attachment:fixed;color:var(--foreground);font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+.bilingual{display:inline-flex;flex-direction:column;align-items:inherit;gap:2px;line-height:1.12;min-width:0}
+.bilingual>small{display:block;font-size:.78em;font-weight:400;letter-spacing:0;color:var(--muted-foreground);line-height:1.2;white-space:normal}
+.heading-bilingual{gap:4px}.heading-bilingual>small{font-size:.56em;color:var(--muted-foreground);font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;letter-spacing:0}
+.tooltip-zh{display:block;margin-top:8px;padding-top:8px;border-top:1px solid #dbe5e7;color:#e2f1f2}
+.header-actions .bilingual>small,.preset-list .bilingual>small,.control-tabs .bilingual>small{font-size:.7em}
+.header-actions button,.preset-list button,.control-tabs [data-slot=tabs-trigger]{min-height:32px}
+.plot-legend .bilingual>small,.metric-strip .bilingual>small{font-size:.72em}
 button,input,select{font:inherit}button,a,input{touch-action:manipulation}
 .lab{max-width:1920px;margin:auto}
 .masthead{height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;border-bottom:1px solid var(--border);background:var(--card)}
@@ -113,3 +120,168 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid #126
 @media(max-width:1100px){.header-actions .quiet-label{display:none}.plot-toolbar{align-items:flex-start}.toggles{gap:9px}.plot-footer{flex-direction:column;align-items:flex-start}.metric-strip small{display:none}.status-pill{font-size:8px;padding:6px 8px}.results-panel{padding:23px}}
 @media(max-width:680px){.results-column{width:100%;order:1}.control-panel{order:0}.control-panel h1{font-size:24px}.brand span:not(.brand-mark){font-size:9px}.header-actions button{font-size:10px;padding:0 8px}.header-actions button:first-of-type{display:none}.masthead{padding:0 15px}.brand-mark{width:35px;height:39px;line-height:36px;font-size:30px}.workspace{gap:16px}.moments-list{max-height:390px;overflow-y:auto;padding-right:3px}.chart-stage{min-height:330px}.fit-status{font-size:9px}.plot-legend{gap:8px 12px}.plot-toolbar{flex-wrap:wrap}.calculation-error{min-height:330px;padding:20px}.equation-block p{font-size:16px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* Scientific workbench: color connects each control to its equation term. */
+.regularization-panel{background:#fff;border:1px solid #cfdee3;border-radius:17px;padding:24px 28px;min-width:0}
+.equation-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.equation-heading h2{font:24px Georgia,serif;margin:8px 0 16px}
+.live-equation{border:1px solid #d9e6ea;border-radius:12px;background:linear-gradient(110deg,#f0f7fa,#fcfdff);padding:15px 18px}
+.math-display{display:block;max-width:100%;overflow-x:auto;font-size:18px}
+.math-display .katex-display{margin:12px 0 16px}
+.equation-key{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:#546e79;padding:4px 0}
+.equation-key b{color:#163e51}
+.equation-live-values{text-align:center;margin:4px 0 12px;font-size:15px;color:#274c77;overflow-x:auto}
+.tuning-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:18px}
+.tuning-card{border:1px solid #dce5e9;border-top:3px solid #274c77;border-radius:10px;padding:15px;min-width:0;background:#fcfdff}
+.mass-card{border-top-color:#087f8c;background:#f7fcfc}.slope-card{border-top-color:#8051b0;background:#fcfaff}
+.control-heading{display:flex;justify-content:space-between;gap:6px;align-items:center;font-size:14px}
+.help-trigger{color:#768992;border:0;background:transparent;padding:4px;cursor:help}.help-popup{font-size:14px;line-height:1.6;padding:12px 15px}
+.tuning-number{font:27px Georgia,serif;margin:12px 0 20px}.tuning-number small{font:16px Georgia,serif;color:#627985}
+.tuning-card [data-slot=slider-thumb]{width:17px;height:17px;border:2px solid #274c77;background:#fff}
+.tuning-card [data-slot=slider-range]{background:#274c77}.mass-card [data-slot=slider-range]{background:#087f8c}.slope-card [data-slot=slider-range]{background:#8051b0}
+.mass-card [data-slot=slider-thumb]{border-color:#087f8c}.slope-card [data-slot=slider-thumb]{border-color:#8051b0}
+.range-ends{display:flex;justify-content:space-between;gap:5px;font-size:12px;color:#72828c;margin-top:9px}
+.tuning-card p{font-size:13px;line-height:1.55;color:#607786;margin:12px 0 0}
+.window-label{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:13px;margin-top:14px}
+.window-label input{width:65px;background:#fff;border:1px solid #cad8e0;border-radius:6px;padding:5px 7px}
+.piece-equation{font-size:14px;margin:14px 0;overflow-x:auto}.piece-toggle{display:flex;justify-content:space-between;align-items:center;font-size:14px;gap:8px;margin-bottom:16px}.piece-toggle b{margin-left:6px}
+.objective-readout{display:flex;flex-wrap:wrap;gap:10px 24px;padding:15px 0;margin-top:4px;font-size:13px}.objective-readout b{margin-left:6px;font-variant-numeric:tabular-nums}
+.mass-value{color:#087f8c}.slope-value{color:#8051b0}
+.tuning-status{border-top:1px solid #e2e9ec;padding-top:13px;font-size:13px;line-height:1.6;color:#526e79}
+.tuning-status strong{display:block;color:#237159;font-size:14px;margin-bottom:3px}.tuning-status.is-exploring strong{color:#9a611d}
+.preset-list button{border-color:color-mix(in srgb,var(--preset-color,#126c83) 35%,white);background:color-mix(in srgb,var(--preset-color,#126c83) 8%,white);color:var(--preset-color,#126c83);font-size:14px;height:36px}
+.preset-list button.is-active{background:var(--preset-color,#126c83);color:white;border-color:var(--preset-color,#126c83)}
+.preset-source{display:inline-flex;gap:5px;align-items:center;font-size:13px;color:#126c83;margin:-8px 0 17px;text-decoration:none}.preset-source:hover{text-decoration:underline}
+.source-downloads{background:#fff;border:1px solid var(--border);border-radius:13px;padding:20px 24px}
+.source-downloads h3{font-size:17px;margin:0 0 7px}.source-downloads p{font-size:14px;color:#617883;line-height:1.7;margin:6px 0 12px}
+.source-downloads .export-buttons{flex-wrap:wrap;gap:10px}.source-downloads button{font-size:14px}.source-downloads small{display:block;font-size:12px;color:#74848b;margin-top:12px}
+.workspace{grid-template-columns:340px minmax(0,1fr)}
+.muted,.method-copy p,.explanation-strip p{font-size:16px}
+.eyebrow,.preset-label,.quiet-label,.moment-columns,.slider-caption,.slider-caption em,.privacy-note,.fit-status,.source-footer,.source-footer p,.metric-strip small{font-size:12px}
+.field-label,.field-label select,.moment-fields input,.toggle-label,.normalization-setting .toggle-label,.plot-toolbar .toggle-label,.plot-toolbar button,.plot-legend,.export-buttons button,.reset-button,.status-pill,.plot-subtitle,.plot-footer p,.explanation-strip h3,.moments-table-wrap table{font-size:14px}
+.normalization-setting p,.slider-help,.metric-strip span,.hover-card small,.method-copy code{font-size:13px}
+.slider-caption{padding-left:0}.moment-fields input{height:36px}.moment-columns{grid-template-columns:40px 1fr 1fr}.moment-fields{grid-template-columns:40px 1fr 1fr}
+.plot-toolbar{flex-wrap:wrap}.export-buttons{flex-wrap:wrap}.status-pill{white-space:normal}
+@media(max-width:1200px){.tuning-grid{grid-template-columns:1fr}.math-display{font-size:16px}.regularization-panel{padding:20px}.workspace{grid-template-columns:310px minmax(0,1fr)}}
+@media(max-width:760px){.workspace{display:flex;flex-direction:column}.control-panel,.results-column{width:100%}.equation-heading{align-items:flex-start}.equation-heading h2{font-size:21px}.math-display{font-size:14px}.live-equation{padding:10px}.regularization-panel{padding:16px}.metric-strip strong{font-size:17px}.header-actions button{font-size:14px}.status-pill{display:inline-flex}.results-panel{padding:16px}.plot-top{flex-wrap:wrap}}
+
+/* One work surface: the active sliders sit beside, never over, the chart. */
+.masthead{height:70px}
+.workspace{grid-template-columns:320px minmax(0,1fr);gap:16px;padding:14px 20px}
+.control-panel{position:sticky;top:14px;padding:16px;max-height:calc(100dvh - 98px);display:flex;flex-direction:column;min-height:0}
+.control-panel-top{flex:none}
+.control-panel h1{font-size:21px;margin:0 0 10px}
+.control-panel .preset-list{margin:0 0 10px;gap:6px}
+.control-panel .preset-list button{height:32px;padding:0 9px}
+.control-panel .preset-source{margin:0 0 12px}
+.control-tabs{min-height:0;gap:10px}
+.control-tabs>[data-slot=tabs-list]{width:100%;height:38px;flex:none}
+.control-tabs [data-slot=tabs-trigger]{font-size:14px}
+.control-scroll{min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#b8cccf transparent;padding:0 3px 4px 0}
+.control-scroll [data-slot=tabs-content]{min-width:0}
+.control-panel .regularization-panel{padding:0;border:0;border-radius:0}
+.tuning-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:13px;color:#627b85}
+.tuning-panel-heading button{font-size:13px;padding:0 7px}
+.control-panel .tuning-grid{grid-template-columns:1fr;gap:10px;margin:6px 0 12px}
+.control-panel .tuning-card{padding:10px 12px}
+.control-panel .control-heading{line-height:1.4}
+.alpha-value-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:7px 0 13px}
+.control-panel .tuning-number{font-size:23px;margin:0;white-space:nowrap}
+.control-panel .tuning-number small{font-size:14px}
+.control-panel .window-label{margin:0;font-size:12px;gap:5px}
+.control-panel .window-label input{width:48px;padding:3px}
+.control-panel .range-ends{margin-top:7px}
+.control-panel .piece-toggle{margin:7px 0 13px;gap:8px}
+.control-panel .piece-toggle>b{font-size:14px;font-weight:500;white-space:nowrap;margin-left:auto}
+.control-panel .piece-equation{margin:0;font-size:13px}
+.control-panel .tuning-status{font-size:12px;line-height:1.5;padding-top:10px}
+.control-panel .tuning-status strong{font-size:13px}
+.control-panel .moments-list{max-height:none;overflow:visible}
+.equation-ribbon{border:1px solid #cfdee3;border-radius:13px;padding:8px 18px 10px;background:linear-gradient(110deg,#f0f7fa,#fcfdff);min-width:0}
+.ribbon-heading{display:flex;align-items:center;justify-content:space-between}
+.ribbon-heading .help-trigger{padding:0}
+.equation-ribbon .live-equation{padding:0;border:0;background:none}
+.equation-ribbon .math-display{font-size:18px}
+.equation-ribbon .katex-display{margin:5px 0 8px}
+.equation-ribbon .equation-live-values{font-size:14px;margin:0}
+.results-column{gap:12px}
+.results-panel{padding:16px 22px}
+.plot-top h2{font-size:27px;margin:4px 0}
+.plot-top .eyebrow{display:none}
+.plot-toolbar{margin-top:12px;padding-top:10px}
+.chart-stage{min-height:0}
+.main-chart{height:clamp(260px,calc(100dvh - 380px),590px)!important;margin-top:5px}
+.plot-legend{padding:4px 0 12px;font-size:13px;gap:8px 16px}
+.metric-strip{padding:10px 0}
+.metric-strip span{margin-bottom:4px}
+.metric-strip strong{font-size:20px}
+.fit-status{padding:8px 0}
+.objective-readout{border-top:1px solid #edf1f1;padding:9px 0;gap:8px 18px;margin:0;font-size:12px}
+.plot-footer{margin-top:5px}
+@media(min-width:1600px){.workspace{grid-template-columns:350px minmax(0,1fr);padding:16px 30px;gap:20px}.main-chart{height:clamp(300px,calc(100dvh - 380px),720px)!important}}
+@media(max-width:1100px) and (min-width:761px){.workspace{grid-template-columns:300px minmax(0,1fr);padding:12px;gap:12px}.control-panel{padding:12px}.results-panel{padding:14px}.equation-ribbon{padding:8px 10px}.equation-ribbon .math-display{font-size:15px}.plot-toolbar{gap:6px}.plot-toolbar .toggles{gap:8px}.plot-toolbar .toggle-label{font-size:13px}.main-chart{height:clamp(250px,calc(100dvh - 405px),540px)!important}}
+@media(max-width:760px){
+  .workspace{padding:10px;gap:12px}
+  .control-panel{position:static;max-height:none;padding:12px}
+  .control-panel h1{font-size:19px;margin-bottom:8px}
+  .control-panel .preset-list{flex-wrap:nowrap;overflow-x:auto;padding-bottom:3px}
+  .control-panel .preset-list button{flex-shrink:0}
+  .control-panel .preset-source{margin-bottom:7px}
+  .control-scroll{max-height:260px}
+  .control-panel .tuning-grid{grid-template-columns:repeat(3,minmax(230px,1fr));overflow-x:auto;padding-bottom:8px}
+  .control-panel .tuning-status{padding-top:6px}
+  .control-panel .tuning-panel-heading{position:sticky;left:0}
+  .equation-ribbon .math-display{font-size:14px}
+  .equation-ribbon .equation-live-values{font-size:12px}
+  .main-chart{height:320px!important}
+  .calculation-error{min-height:280px}
+}
+
+/* Plot presentation: a softly tinted plotting surface, readable grid, and
+   genuine KaTeX-rendered mathematical axis labels. */
+.chart-stage{
+  position:relative;
+  padding:8px 10px 5px;
+  border:1px solid #d2e1e4;
+  border-radius:13px;
+  background:linear-gradient(145deg,#f9fcfc 0%,#eef6f7 100%);
+}
+.chart-shell{position:relative;width:100%}
+.axis-label{
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  color:#315866;
+  font-size:18px;
+  font-weight:700;
+}
+.axis-label .math-inline{display:block}
+.axis-label .katex{font-size:1.12em}
+.axis-label-x{left:50%;bottom:0;transform:translateX(-50%)}
+.axis-label-y{left:13px;top:50%;transform:translate(-50%,-50%) rotate(-90deg);transform-origin:center}
+@media(max-width:760px){
+  .chart-stage{padding:5px 6px 3px}
+  .axis-label{font-size:16px}
+  .axis-label-y{left:11px}
+}
+
+/* Optional guided path for first-time custom-input users. */
+.guide-dialog{max-width:520px;padding:27px 29px;gap:15px;border:1px solid #cfe0e4;box-shadow:0 18px 60px #153d4824}
+.guide-kicker{display:flex;align-items:center;gap:8px;color:#19777e;font-size:11px;font-weight:700;letter-spacing:1.3px}
+.guide-dialog [data-slot=dialog-title]{font-family:Georgia,serif;font-size:25px;line-height:1.2;font-weight:400}
+.guide-dialog [data-slot=dialog-description]{font-size:14px;line-height:1.75;color:#526e79}
+.guide-dialog [data-slot=dialog-description] .math-inline{display:inline-block;margin:0 2px}
+.guide-target-note{padding:12px 14px;border-left:3px solid #19777e;border-radius:6px;background:#eef7f7;color:#466a73;font-size:13px;line-height:1.5}
+.guide-actions{display:flex;justify-content:flex-end;align-items:center;gap:9px;margin-top:2px}
+.guide-actions .bilingual{align-items:center}
+.guided-target{outline:2px solid #19959a;outline-offset:3px;animation:guided-pulse 1.5s ease-in-out infinite}
+@keyframes guided-pulse{
+  0%,100%{box-shadow:0 0 0 0 #19959a32}
+  50%{box-shadow:0 0 0 6px #19959a12}
+}
+@media(max-width:760px){
+  .guide-dialog{padding:23px 21px}
+  .guide-dialog [data-slot=dialog-title]{font-size:22px}
+  .guide-actions{flex-direction:column-reverse;align-items:stretch}
+  .guide-actions button{width:100%}
+}

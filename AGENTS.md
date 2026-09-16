@@ -9,7 +9,11 @@ Parent AGENTS.md remains in force. Do not edit the frozen method or saved result
 - Custom inputs, omitted M0 and counts other than the six-moment presets are
   explicitly exploratory, as requested for this web interface. They must never
   be silently labeled as approved lattice results.
-- Do not add manual alpha rules, fallback roots, clipping, or rescaling.
+- User-authorized Mellin_Lab_exploration_v2 controls may vary alpha and the mass
+  and stiffness coefficients independently. Keep these separate from the frozen
+  baseline: alpha_star always refers to the M+S discrepancy root for current inputs.
+  Reset restores alpha=alpha_star and both coefficients=1. Never call a manual
+  curve discrepancy-selected or approved. No fallback roots, clipping, or rescaling.
 - Reference curves are overlays only, never used by the inverse.
 - Run `npm test` and `npm run typecheck` after numerical/interface changes.
 - The reduced system in lib/inversion.ts is algebraically equivalent to the

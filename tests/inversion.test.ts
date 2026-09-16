@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { reconstruct, fitAtAlpha, selectAlpha, cholesky } from "../lib/inversion.ts";
+import { reconstruct, fitAtAlpha, selectAlpha, cholesky, massMatrix, slopeMatrix } from "../lib/inversion.ts";
+import assets from "../lib/operators.json" with { type: "json" };
 import fixtures from "./python-reference.json" with { type: "json" };
 import presets from "../lib/presets.json" with { type: "json" };
 
@@ -54,4 +55,32 @@ void test("arbitrary supported counts and repeated runs", () => {
     assert.deepEqual(r.central,reconstruct(input).central);
     assert.ok(r.central.every(Number.isFinite));
   }
+});
+void test("split M and S sum to the frozen penalty without altering the baseline",()=>{
+  const s=slopeMatrix.flat();
+  assert.ok(maxDiff(massMatrix.flat().map((v,i)=>v+s[i]),assets.penalty.flat())<1e-12);
+});
+void test("exploration keeps alpha_star fixed and reports discrepancy honestly",()=>{
+  const base=reconstruct(pion);
+  for(const tuning of [{logAlpha:-2,mass:1,slope:1},{logAlpha:2,mass:1,slope:1},
+      {logAlpha:0,mass:0,slope:1},{logAlpha:0,mass:1,slope:0},
+      {logAlpha:.5,mass:10,slope:.1}]){
+    const r=reconstruct(pion,tuning);
+    assert.equal(r.alphaStar,base.alpha);
+    assert.ok(Math.abs(r.alpha/base.alpha/10**tuning.logAlpha-1)<1e-12);
+    assert.ok(r.stationarity<1e-9);
+    assert.equal(r.discrepancyMet,Math.abs(r.ratio-1)<=1e-6);
+    assert.ok(r.massEnergy>=0&&r.slopeEnergy>=0);
+    assert.equal(r.objective,r.R**2+r.alpha*(tuning.mass*r.massEnergy+tuning.slope*r.slopeEnergy));
+    assert.deepEqual([r.central[0],r.central[100]],[0,0]);
+  }
+  assert.ok(reconstruct(pion,{logAlpha:-1,mass:1,slope:1}).R<base.R);
+  assert.ok(reconstruct(pion,{logAlpha:1,mass:1,slope:1}).R>base.R);
+  assert.throws(()=>reconstruct(pion,{logAlpha:0,mass:0,slope:0}),/at least one/);
+});
+void test("scaling both pieces and inversely scaling alpha leaves the curve unchanged",()=>{
+  const base=reconstruct(pion);
+  const shifted=reconstruct(pion,{logAlpha:-1,mass:10,slope:10});
+  assert.ok(maxDiff(base.central,shifted.central)<1e-10);
+  assert.ok(maxDiff(base.sigma,shifted.sigma)<1e-10);
 });
